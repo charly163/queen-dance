@@ -1,0 +1,6 @@
+{
+  "name": "Queen Dance",
+  "description": "Un MVP de administración de asistencia rápido, intuitivo y visual para la academia de danza Queen Dance, con base de datos offline (Room) y preparación para sincronización en la nube.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
