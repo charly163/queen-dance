@@ -21,18 +21,12 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
     
-    - name: Generate Gradle wrapper
-      run: gradle wrapper --gradle-version 8.5
-    
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    
     - name: Create .env file
       run: |
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
     
     - name: Build APK
-      run: ./gradlew assembleDebug --stacktrace
+      run: gradle assembleDebug --stacktrace
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
