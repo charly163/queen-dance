@@ -22,8 +22,9 @@ android {
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     
-    // Read GEMINI_API_KEY from environment variable
-    buildConfigField("String", "GEMINI_API_KEY", "\"${System.getenv("GEMINI_API_KEY") ?: ""}\"")
+    // Read GEMINI_API_KEY from gradle property or environment variable
+    val geminiApiKey = project.findProperty("GEMINI_API_KEY") as String? ?: System.getenv("GEMINI_API_KEY") ?: ""
+    buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
   }
 
   signingConfigs {
