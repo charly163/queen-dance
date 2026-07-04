@@ -21,12 +21,10 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
     
-    - name: Create .env file
-      run: |
-        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
-    
     - name: Build APK
       run: gradle assembleDebug --stacktrace
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
