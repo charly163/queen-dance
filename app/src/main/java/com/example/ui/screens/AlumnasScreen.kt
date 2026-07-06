@@ -168,8 +168,8 @@ fun AlumnasScreen(
                     )
                 }
 
-                // Plans filter chips (2, 3, 4 Days)
-                items(listOf(2, 3, 4)) { daysCount ->
+                // Plans filter chips (1, 2, 3, 4 Days)
+                                items(listOf(1, 2, 3, 4)) { daysCount ->
                     FilterChip(
                         selected = selectedFilterPlan == daysCount,
                         onClick = { viewModel.setFilterPlan(if (selectedFilterPlan == daysCount) null else daysCount) },
