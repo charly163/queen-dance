@@ -330,8 +330,33 @@ class QueenDanceViewModel(application: Application) : AndroidViewModel(applicati
     fun simulatePdfGeneration(studentName: String, onComplete: (String) -> Unit) {
         viewModelScope.launch {
             _syncMessage.value = "Generando Reporte Mensual PDF..."
-            kotlinx.coroutines.delay(1500)
-            val fileName = "Reporte_${studentName.replace(" ", "_")}_Julio_2026.pdf"
+            
+            val context = getApplication<Application>()
+            var fileName = ""
+            
+            try {
+                if (studentName == "General_Academy") {
+                    val stats = generalMonthlyStats.value
+                    val alumnas = filteredAlumnas.value
+                    val allAttendance = repository.allAttendanceFlow.first()
+                    fileName = com.example.util.PdfGenerator.generateGeneralReport(
+                        context, stats, alumnas, allAttendance
+                    )
+                } else {
+                    val student = selectedStudentForHistory.value
+                    val stats = selectedStudentStats.value
+                    val history = selectedStudentHistoryList.value
+                    if (student != null) {
+                        fileName = com.example.util.PdfGenerator.generateIndividualReport(
+                            context, student, stats, history
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                fileName = "Error al generar PDF: ${e.message}"
+            }
+            
             _syncMessage.value = "¡Reporte guardado exitosamente como $fileName!"
             onComplete(fileName)
             kotlinx.coroutines.delay(2000)

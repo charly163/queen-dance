@@ -198,21 +198,21 @@ fun AddEditAlumnaScreen(
                 }
             }
 
-            // Plan Selection (2, 3, 4 Days per week Toggle Row)
-            Text(
-                text = "Plan (Días por semana)",
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(bottom = 12.dp)
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                listOf(2, 3, 4).forEach { option ->
+            // Plan Selection (1, 2, 3, 4 Days per week Toggle Row)
+                        Text(
+                            text = "Plan (Días por semana)",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.padding(bottom = 12.dp)
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 24.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            listOf(1, 2, 3, 4).forEach { option ->
                     val isSelected = plan == option
                     Card(
                         modifier = Modifier
