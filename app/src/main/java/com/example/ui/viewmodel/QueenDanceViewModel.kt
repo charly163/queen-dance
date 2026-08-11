@@ -77,10 +77,11 @@ class QueenDanceViewModel(application: Application) : AndroidViewModel(applicati
     val attendanceUiState: StateFlow<List<StudentAttendanceItem>> = combine(
         repository.activeAlumnasFlow,
         selectedDateString,
-        dayOfWeekSpanish
-    ) { alumnas, dateStr, dayOfWeek ->
+        dayOfWeekSpanish,
+        repository.allAttendanceFlow
+    ) { alumnas, dateStr, dayOfWeek, allAttendances ->
         // Get all attendances for the selected date
-        val attendances = repository.getAttendanceForDateFlow(dateStr).first()
+        val attendances = allAttendances.filter { it.date == dateStr }
         val attendanceMap = attendances.associateBy { it.studentId }
 
         // Filter students scheduled for this day
